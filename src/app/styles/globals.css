@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #FAFAFE;
+  color: #1E1A2E;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ── Scroll reveal ─────────────────────────────── */
+.reveal       { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(0.4,0,0.2,1), transform 1s cubic-bezier(0.4,0,0.2,1); }
+.reveal.show  { opacity: 1; transform: none; }
+.reveal-l     { opacity: 0; transform: translateX(-26px); transition: opacity 0.95s ease, transform 0.95s ease; }
+.reveal-l.show{ opacity: 1; transform: none; }
+.reveal-r     { opacity: 0; transform: translateX(26px);  transition: opacity 0.95s ease, transform 0.95s ease; }
+.reveal-r.show{ opacity: 1; transform: none; }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+
+/* ── Glass card ────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(180,160,230,0.2);
+}
+.glass-strong {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(180,160,230,0.25);
+}
+
+/* ── Shimmer text ──────────────────────────────── */
+.shimmer-text {
+  background: linear-gradient(90deg, #8B70CC 0%, #BBA8E8 40%, #E8DEFF 55%, #BBA8E8 70%, #8B70CC 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* ── Button gloss overlay ──────────────────────── */
+.btn-gloss {
+  position: relative;
+  overflow: hidden;
+}
+.btn-gloss::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(120deg, transparent 20%, rgba(255,255,255,0.45) 50%, transparent 80%);
+  animation: gloss 2.8s ease-in-out infinite;
+}
+@keyframes gloss {
+  0%   { left: -100%; }
+  60%  { left: 200%;  }
+  100% { left: 200%;  }
+}
+
+/* ── Orb / blob background ─────────────────────── */
+.orb {
+  border-radius: 50%;
+  filter: blur(56px);
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ── Product card hover ────────────────────────── */
+.product-card {
+  transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.45s ease;
+}
+.product-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 60px rgba(122,92,192,0.14);
+}
+
+/* ── FAQ accordion ─────────────────────────────── */
+.faq-body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease;
+}
+.faq-body.open {
+  max-height: 300px;
+  opacity: 1;
+}
+
+/* ── Ingredient card shimmer border ───────────── */
+.ingredient-card {
+  position: relative;
+  overflow: hidden;
+}
+.ingredient-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(180,160,230,0.5) 0%, rgba(255,255,255,0) 50%, rgba(180,160,230,0.5) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ── Scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar        { width: 5px; }
+::-webkit-scrollbar-track  { background: #F0EAFC; }
+::-webkit-scrollbar-thumb  { background: #C4B0E8; border-radius: 99px; }
